@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Kevin Volkel" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="og:title" content="" />
+    <meta name="og:description" content="" />
+    <meta name="og:image" content="" />
+
+    <title>Add Product</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+  </head>
+  <body>
+    <form class="form product-form">
+      <div>
+        <h4>Create Product</h4>
+        <div class="form-inputs">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-input" />
+          </div>
+          <div class="form-row">
+            <label for="price">Price</label>
+            <input type="text" id="price" class="form-input" />
+          </div>
+          <div class="form-row">
+            <label for="image">Image</label>
+            <input type="file" id="image" class="form-input" accept="image/*" />
+          </div>
+        </div>
+      </div>
+      <button type="submit">Upload Product</button>
+    </form>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
