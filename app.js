@@ -8,7 +8,9 @@ const fileUpload = require('express-fileupload')
 const connectDB = require('./db/connect')
 const uploadImage = require('./controllers/uploadCon')
 const productRouter = require('./routers/productRoute')
+const cartRouter = require('./routers/cartRoute')
 const cloudinary = require('cloudinary').v2;
+const notFoundMiddleware = require('./middleware/notFound')
 cloudinary.config({ 
   cloud_name: process.env.cloud_name,
   api_key: process.env.api_key, 
@@ -22,7 +24,10 @@ app
   .use(fileUpload({useTempFiles: true}))
   .use( '/', express.static('./public/addPage'))
   .use('/api/v1/product', productRouter)
+  .use('/api/v1/cart', cartRouter)
   .post('/api/v1/uploads', uploadImage)
+  
+  .use(notFoundMiddleware)
 
 
 const start = async () => {

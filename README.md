@@ -38,6 +38,10 @@
   - adds or removes a product id to the cart or changes quantity
 - getCart
   - returns all items in the cart
+- createCart
+  - only supposed to be used once in development to create a cart in the db
+- deleteCarts
+  - for development, deletes every cart if more than one is every created
 
 # Routes
 

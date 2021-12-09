@@ -1,0 +1,41 @@
+.title{
+  text-align: center;
+  margin: 2rem auto;
+  border-bottom: black 2px solid;
+  width: 10rem;
+}
+
+.container{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  border: 2px grey solid;
+  height: auto;
+  padding: 8px;
+}
+
+.product-card{
+  width: 22%;
+  height: 20rem;
+  border: 1px solid black;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title{
+  font-size: 2rem;
+}
+
+.product-price{
+  font-size: 1.3rem;
+}
+
+.product-img{
+  width: 100%;  
+  justify-self: flex-end;
+  margin-top: 10%;
+}
