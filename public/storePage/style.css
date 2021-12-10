@@ -34,8 +34,31 @@
   font-size: 1.3rem;
 }
 
+.img-container{
+  height: 200px;
+  width: 100%;
+  margin-top: 5px;
+}
+
 .product-img{
-  width: 100%;  
-  justify-self: flex-end;
-  margin-top: 10%;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.cart{
+  font-size: 2rem;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  text-decoration: none;
+}
+
+.add-btn{
+  width: 50%;
+  height: 30px;
+  margin: auto;
+  border-radius: 10px;
+  outline: none;
 }

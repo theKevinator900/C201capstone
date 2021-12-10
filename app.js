@@ -23,11 +23,12 @@ app
   .use(express.json(), express.urlencoded({extended: false}))
   .use(fileUpload({useTempFiles: true}))
   .use( '/', express.static('./public/addPage'))
-  .use('/api/v1/product', productRouter)
+  .use( '/store', express.static('./public/storePage'))
+  .use('/api/v1/products', productRouter)
   .use('/api/v1/cart', cartRouter)
   .post('/api/v1/uploads', uploadImage)
   
-  .use(notFoundMiddleware)
+  // .use(notFoundMiddleware)
 
 
 const start = async () => {
