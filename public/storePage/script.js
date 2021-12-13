@@ -1,4 +1,5 @@
 const url = '/api/v1/products'
+const cartUrl = '/api/v1/cart'
 
 const container = document.querySelector('.store-container')
 
@@ -29,6 +30,10 @@ const addToCart = async (e) => {
   const name = e.target.parentElement.children[0].innerHTML
   console.log(name);
 
-  const {data} = await axios.get(`${url}`, {name: name})
-  console.log(data);
+  const {data : {results}} = await axios.get(`${url}/`)
+  const product = results.filter( (result) => name == result.name)[0]
+  const productID = product._id
+  console.log(productID);
+  const newCart = await axios.put(`${cartUrl}/${productID}`)
+  
 }

@@ -24,6 +24,7 @@ app
   .use(fileUpload({useTempFiles: true}))
   .use( '/', express.static('./public/addPage'))
   .use( '/store', express.static('./public/storePage'))
+  .use( '/cart', express.static('./public/cart'))
   .use('/api/v1/products', productRouter)
   .use('/api/v1/cart', cartRouter)
   .post('/api/v1/uploads', uploadImage)

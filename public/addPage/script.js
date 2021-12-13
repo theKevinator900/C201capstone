@@ -13,7 +13,7 @@ productForm.addEventListener('submit', async (e) => {
   const priceValue = priceInput.value;
   try{
     const product = {name: nameValue, price: priceValue, image: imageValue} 
-    await axios.post(`${url}/product`, product)
+    await axios.post(`${url}/products`, product)
     nameInput.value = '';
     priceInput.value = '';
     imageInput.value = '';

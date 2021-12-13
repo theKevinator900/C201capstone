@@ -6,8 +6,7 @@ const createProduct = async (req, res) => {
 }
 
 const getProducts = async (req, res) => {
-  const filters = req.body;
-  const products = await Product.find(filters)
+  const products = await Product.find({})
   res.status(200).json({results: products, length: products.length})
 }
 
