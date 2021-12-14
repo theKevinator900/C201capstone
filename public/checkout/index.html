@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Kevin Volkel">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="og:title" content="">
+    <meta name="og:description" content="">
+    <meta name="og:image" content="">
+
+    <title>Checkout</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+</head>
+<body>
+
+  <section class="section section-center content">
+    <h1>Checkout</h1>
+    <form id="payment-form">
+      <div class="totals">
+        <h4 class="total-title">Price</h4>
+        <p id="products-price"></p>
+        <p id="shipping-fee"></p>
+        <p id="total-price"></p>
+      </div>
+      <p>Test Card Number: 4242 4242 4242 4242</p>
+      <div id="card-element"></div> <!--*Strip JS Automatically Injects HTML Here -->
+      <button type="submit" id="submit">
+        <div class="spinner hidden" id="spinner"></div>
+        <span id="button-text">Pay</span>
+      </button>
+      <p id="card-error" role="alert"></p>
+      <p class="result-message hidden">
+        Payment succeeded, see the result in your
+        <a href="https://dashboard.stripe.com/dashboard" target="_blank">Stripe Dashboard. </a>
+        Refresh the page to pay again
+      </p>
+    </form>
+  </section>
+
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  <script src="main.js"></script>
+</body>
+</html>

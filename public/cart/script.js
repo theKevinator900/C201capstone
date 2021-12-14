@@ -29,20 +29,28 @@ const fetchCart = async () => {
 </div>
 <div class="product-info">
 <h3 class="product-name">${name}</h3>
-<p class="price">${price}</p>
-<p class="quantity"> ${quantity} </p>
+<p class="price">${price} x ${quantity}</p>
 </div>
 <div class="button-container">
+<button class="increase"> + </button>
 <button class="delete">Delete</button>
+<button class="decrease"> - </button>
 </div>
 </div>
 `
     }).join('')
     itemsContainer.innerHTML = tempCart;
     let deleteBtns = document.getElementsByClassName('delete')
-    console.log(deleteBtns);
     for(elem of deleteBtns) {
       elem.addEventListener('click', removeFromCart)
+    }
+    let increaseBtns = document.getElementsByClassName('increase')
+    for(elem of increaseBtns){
+      elem.addEventListener('click', increase)
+    }
+    let decreaseBtns = document.getElementsByClassName('decrease')
+    for(elem of decreaseBtns){
+      elem.addEventListener('click', decrease)
     }
   } catch (err) {
     console.error(err);
@@ -50,11 +58,15 @@ const fetchCart = async () => {
 }
 fetchCart();
 
+const getProduct = async (name) => {
+  const {data : {results}} = await axios.get(`${productUrl}/`)
+  return results.filter( (result) => name == result.name)[0]
+}
+
 const removeFromCart = async (e) => {
   let name = e.target.parentElement.parentElement.children[1].children[0].innerHTML
-
-  const {data : {results}} = await axios.get(`${productUrl}/`)
-  const deletedProduct = results.filter( (result) => name == result.name)[0]
+  
+  const deletedProduct = await getProduct(name)
   
   const {data: {cart: [currCart]}} = await axios.get(`${cartUrl}/`)
   const currProducts = currCart.products
@@ -66,3 +78,44 @@ const removeFromCart = async (e) => {
   fetchCart();
 }
 
+const increase = async (e) => {
+  let name = e.target.parentElement.parentElement.children[1].children[0].innerHTML
+  let oldProduct = await getProduct(name)
+
+  const {data: {cart: [currCart]}} = await axios.get(`${cartUrl}/`);
+  const currProducts = currCart.products;
+  const newProducts = currProducts.map( (product) => {
+    if(product.productID !== oldProduct._id) return product;
+    return {productID: oldProduct._id, quantity: Number(product.quantity) + 1}
+  })  
+  
+  const updatedCart = await axios.patch(cartUrl, {products: newProducts})
+  fetchCart();
+}
+
+const decrease = async (e) => {
+  let name = e.target.parentElement.parentElement.children[1].children[0].innerHTML
+  let oldProduct = await getProduct(name)
+
+  const {data: {cart: [currCart]}} = await axios.get(`${cartUrl}/`);
+  const currProducts = currCart.products;
+  let remove = false;
+  const newProducts = currProducts.map( (product) => {
+    if(product.productID !== oldProduct._id) return product;
+    if(product.quantity == 1){
+      remove = true;
+      return product;
+    }
+    return {productID: oldProduct._id, quantity: Number(product.quantity) - 1}
+  })
+
+  if(remove) return removeFromCart(e)
+  
+  const updatedCart = await axios.patch(cartUrl, {products: newProducts})
+  fetchCart();
+}
+
+const checkout = () => {
+  window.location.href = "/checkout"
+}
+document.getElementsByClassName('checkout')[0].addEventListener('click', checkout)

@@ -9,8 +9,9 @@ const connectDB = require('./db/connect')
 const uploadImage = require('./controllers/uploadCon')
 const productRouter = require('./routers/productRoute')
 const cartRouter = require('./routers/cartRoute')
+const stripeController = require('./controllers/stripeCon');
 const cloudinary = require('cloudinary').v2;
-const notFoundMiddleware = require('./middleware/notFound')
+const notFoundMiddleware = require('./middleware/notFound');
 cloudinary.config({ 
   cloud_name: process.env.cloud_name,
   api_key: process.env.api_key, 
@@ -25,8 +26,10 @@ app
   .use( '/', express.static('./public/addPage'))
   .use( '/store', express.static('./public/storePage'))
   .use( '/cart', express.static('./public/cart'))
+  .use( '/checkout', express.static('./public/checkout'))
   .use('/api/v1/products', productRouter)
   .use('/api/v1/cart', cartRouter)
+  .use('/stripe', stripeController)
   .post('/api/v1/uploads', uploadImage)
   
   // .use(notFoundMiddleware)
