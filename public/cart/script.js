@@ -16,6 +16,9 @@ const fetchCart = async () => {
   try {
     const {data: {cart}} = await axios.get(cartUrl)
     let tempProducts = [];
+    if(cart[0].products.length == 0) {
+      document.getElementsByClassName('checkout')[0].disabled = true;
+    }
     for(product of cart[0].products){
       let singleProduct = await fetchProduct(product.productID)
       tempProducts.push(singleProduct)

@@ -99,16 +99,22 @@ const payWithCard = function (stripe, card, clientSecret) {
     });
 };
 
-const orderComplete = function (paymentIntentId) {
+const orderComplete = async function (paymentIntentId) {
   loading(false);
   document
-    .querySelector('.result-message a')
-    .setAttribute(
-      'href', 
-      'https://dashboard.stripe.com/test/payments' + paymentIntentId
+  .querySelector('.result-message a')
+  .setAttribute(
+    'href', 
+    'https://dashboard.stripe.com/test/payments' + paymentIntentId
     );
     document.querySelector(".result-message").classList.remove('hidden')
     document.querySelector('button').disabled = true;
+
+    let data = await axios.get('/send')
+    let deleted = await axios.patch('/api/v1/cart', {products: []})
+    let timeout = setTimeout( () => {
+      window.location.href = "/store"
+    }, 5000)
 }
 
 const showError = function (errorMsgText) {

@@ -42,6 +42,21 @@
   - only supposed to be used once in development to create a cart in the db
 - deleteCarts
   - for development, deletes every cart if more than one is every created
+- addToCart
+  - takes in id and uploads the product with that id into the cart
+
+### Stripe
+- stripeController
+  - handles all payments
+
+### Email
+- sendEmail
+  - sends an email
+
+### Upload
+- uploadImage
+  - uploads an image to cloudinary
+
 
 # Routes
 
@@ -57,3 +72,15 @@
 - /
   - get: getCart
   - patch: updateCart
+  - delete: deleteCarts
+  - post: createCart
+- /:id
+  - patch: addToCart
+
+### No Routers
+- /api/v1/uploads
+  - post: uploadImage
+- /send
+  - get: sendEmail
+- /stripe
+  - get: stripeController

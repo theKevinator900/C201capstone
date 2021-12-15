@@ -12,6 +12,7 @@ const cartRouter = require('./routers/cartRoute')
 const stripeController = require('./controllers/stripeCon');
 const cloudinary = require('cloudinary').v2;
 const notFoundMiddleware = require('./middleware/notFound');
+const sendEmail = require('./controllers/sendEmail');
 cloudinary.config({ 
   cloud_name: process.env.cloud_name,
   api_key: process.env.api_key, 
@@ -31,7 +32,8 @@ app
   .use('/api/v1/cart', cartRouter)
   .use('/stripe', stripeController)
   .post('/api/v1/uploads', uploadImage)
-  
+  .get('/send', sendEmail)
+    
   // .use(notFoundMiddleware)
 
 
